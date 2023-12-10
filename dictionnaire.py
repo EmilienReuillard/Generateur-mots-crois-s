@@ -2,6 +2,8 @@ from wiktionaryparser import WiktionaryParser
 import random
 from translation import *
 
+PATH_DICO = 'database/dico.txt'
+
 def obtenir_definition_wiktionnaire(mot):
     parser = WiktionaryParser()
     mot_info = parser.fetch(mot, 'french')
@@ -16,22 +18,42 @@ def charger_mots_francais(path):
         mots = fichier.read().splitlines()
     return mots
 
-def generer_mot_francais_aleatoire(path_dictionnary = 'database/dico.txt' ):
+def generer_mot_francais_aleatoire(path_dictionnary = PATH_DICO ):
     mots_francais = charger_mots_francais(path_dictionnary)
     mot_aleatoire = random.choice(mots_francais)
     return mot_aleatoire
 
+def find_word(letter, positon, path_dictionnary = PATH_DICO):
+    with open(PATH_DICO, 'r') as fichier:
+        # content = fichier.read()
+        words = fichier.readlines()
+        
+    for word in words:
+        try:
+            if word[positon]==letter:
+                print(word)
+                return word
+        except:
+            pass
+        
+    print("No word founded")
+    return False
+        
+    print(words[positon].strip())
+
 if __name__ == "__main__":
     
-    # Génération d'un mot aléatoire
-    random_word = generer_mot_francais_aleatoire('database/dico.txt')
-    print(f"random_word = {random_word}")
-    print(f"{random_word[4]}")
+    # # Génération d'un mot aléatoire
+    # random_word = generer_mot_francais_aleatoire(PATH_DICO)
+    # print(f"random_word = {random_word}")
+    # print(f"{random_word[4]}")
     
-    # recherche de définition
-    definition = obtenir_definition_wiktionnaire(random_word)
-    print(f"{random_word}: {definition}")
+    # # recherche de définition
+    # definition = obtenir_definition_wiktionnaire(random_word)
+    # print(f"{random_word}: {definition}")
     
-    #traduction
-    definition_trad = traduire_texte(definition)
-    print(f"{random_word}: {definition_trad}")
+    # #traduction
+    # definition_trad = traduire_texte(definition)
+    # print(f"{random_word}: {definition_trad}")
+    
+    find_word('o', 5, path_dictionnary = PATH_DICO)
