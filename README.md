@@ -1,2 +1,2 @@
-# Generateur-mots-crois-s
+# Generateur-mots-croises
 Générateur automatique de mots croisés
