@@ -69,6 +69,10 @@ class MAP:
         finded_word = find_word(lettre,pos)
         self.insert_word(finded_word, 0, 1, 1)
 
+        for i in range(1,self.height):
+            for j in range(1,self.width):
+                pass
+
         if sens == 1:
             sens = 0
         else:
