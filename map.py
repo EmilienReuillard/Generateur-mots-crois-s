@@ -51,9 +51,6 @@ class MAP:
 
                 
     def fill_grid(self):
-        # Variable
-        sens = 1    #0 = Horizontal // 1 = Vertical
-
         #insert first word Horizontal
         random_word = generer_mot_francais_aleatoire()
         self.insert_word(random_word, 1, 0, 0)
@@ -87,6 +84,15 @@ class MAP:
                 random_word = generer_mot_francais_aleatoire()
                 # print(random_word)
                 self.insert_word(random_word,0 ,i, 1)
+                
+    def set_definition_cases(self):
+        for j in range(self.width):
+            if self.grid[0][j] == '':
+                self.grid[0][j] = "X"
+                
+        for i in range(self.width):
+            if self.grid[i][0] == '':
+                self.grid[i][0] = "X"
         
         
         
