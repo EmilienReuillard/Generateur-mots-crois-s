@@ -32,12 +32,12 @@ def find_word(letter, positon, path_dictionnary = PATH_DICO):
         try:
             for l,p in zip(letter, positon):
                 if word[p]==l:
-                    print(word)
+                    # print(word)
                     return word.strip()
         except:
             pass
         
-    print("No word founded")
+    # print("No word founded")
     return False
         
     print(words[positon].strip())

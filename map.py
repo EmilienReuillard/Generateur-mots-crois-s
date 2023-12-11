@@ -19,13 +19,11 @@ class MAP:
         # Horizontal
         if orientation == 0:
             for i in range(len(word)):
-                # print(word[i])
                 self.grid[x][y + i] = word[i]
 
         # Vertical
         if orientation == 1:
             for i in range(len(word)):
-                # print(word[i])
                 self.grid[x + i][y] = word[i]
 
     def detect_intersections(self, start_x, start_y, sens):
@@ -33,18 +31,15 @@ class MAP:
         letters = []
         pos = []
 
-        print(f"sens = {sens}")
-
         if sens == 0:
             for j in range(len(self.grid[0])):
                 if self.grid[start_x][j] != '':
-                    letters.append(self.grid[0][j])
-                    pos.append([start_x, j])
+                    letters.append(self.grid[start_x][j])
+                    pos.append(j)
 
         if sens == 1:
 
-            print("In sens == 1")
-            print(f"len(self.grid[:][0]) = {len(self.grid[:][0])}")
+            # print(f"len(self.grid[:][0]) = {len(self.grid[:][0])}")
 
             for i in range(len(self.grid[:][0])):
                 if self.grid[i][start_y] != '':
@@ -64,19 +59,34 @@ class MAP:
         self.insert_word(random_word, 1, 0, 0)
 
         # insert first verical
-        lettre, pos = self.detect_intersections(0,1,sens)
-        print(lettre, pos)
+        lettre, pos = self.detect_intersections(0,1,1)
+        # print(lettre, pos)
         finded_word = find_word(lettre,pos)
         self.insert_word(finded_word, 0, 1, 1)
 
-        for i in range(1,self.height):
-            for j in range(1,self.width):
-                pass
-
-        if sens == 1:
-            sens = 0
-        else:
-            sens = 1
+        for i in range(1,self.height,2):
+            
+            #horizontal
+            try:
+                lettre, pos = self.detect_intersections(i,0,0)
+                # print(lettre, pos)
+                finded_word = find_word(lettre,pos)
+                self.insert_word(finded_word, i, 0, 0)
+            except:
+                random_word = generer_mot_francais_aleatoire()
+                # print(random_word)
+                self.insert_word(random_word, i, 0, 0)
+            
+            #vertical
+            try:
+                lettre, pos = self.detect_intersections(0,i,1)
+                # print(lettre, pos)
+                finded_word = find_word(lettre,pos)
+                self.insert_word(finded_word,0,i, 1)
+            except:
+                random_word = generer_mot_francais_aleatoire()
+                # print(random_word)
+                self.insert_word(random_word,0 ,i, 1)
         
         
         
