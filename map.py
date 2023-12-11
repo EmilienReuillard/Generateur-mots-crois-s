@@ -32,7 +32,7 @@ class MAP:
         pos = []
 
         if sens == 0:
-            for j in range(len(self.grid[0])):
+            for j in range(start_x,len(self.grid[0])):
                 if self.grid[start_x][j] != '':
                     letters.append(self.grid[start_x][j])
                     pos.append(j)
@@ -41,7 +41,7 @@ class MAP:
 
             # print(f"len(self.grid[:][0]) = {len(self.grid[:][0])}")
 
-            for i in range(len(self.grid[:][0])):
+            for i in range(start_y,len(self.grid[:][0])):
                 if self.grid[i][start_y] != '':
                     letters.append(self.grid[i][start_y])
                     pos.append(i)
