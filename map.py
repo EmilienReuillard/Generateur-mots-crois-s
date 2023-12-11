@@ -47,6 +47,15 @@ class MAP:
                     pos.append(i)
 
         return letters, pos
+    
+    def set_definition_cases(self):
+        for j in range(self.width):
+            if self.grid[0][j] == '':
+                self.grid[0][j] = "X"
+                
+        for i in range(self.width):
+            if self.grid[i][0] == '':
+                self.grid[i][0] = "X"
         
 
                 
@@ -84,15 +93,37 @@ class MAP:
                 random_word = generer_mot_francais_aleatoire()
                 # print(random_word)
                 self.insert_word(random_word,0 ,i, 1)
-                
-    def set_definition_cases(self):
-        for j in range(self.width):
-            if self.grid[0][j] == '':
-                self.grid[0][j] = "X"
-                
-        for i in range(self.width):
-            if self.grid[i][0] == '':
-                self.grid[i][0] = "X"
+        
+        # Ajout des cases de définition sur les bords
+        self.set_definition_cases()
+        
+        print(self.grid)
+        print("\n\n")
+        
+        # Deuxième génération
+        for i in range(2,self.height,2):
+            
+            #horizontal
+            try:
+                lettre, pos = self.detect_intersections(i,1,0)
+                finded_word = find_word(lettre,pos)
+                print(f"{lettre}, {pos}, {finded_word}")
+                self.insert_word(finded_word, i, 1, 0)
+            except:
+                random_word = generer_mot_francais_aleatoire()
+                # print(random_word)
+                self.insert_word(random_word, i, 1, 0)
+            
+            #vertical
+            try:
+                lettre, pos = self.detect_intersections(1, i, 1)
+                # print(lettre, pos)
+                finded_word = find_word(lettre,pos)
+                self.insert_word(finded_word, 1, i, 1)
+            except:
+                random_word = generer_mot_francais_aleatoire()
+                # print(random_word)
+                self.insert_word(random_word,1 ,i, 1)
         
         
         
