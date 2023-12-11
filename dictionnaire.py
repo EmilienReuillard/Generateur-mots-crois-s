@@ -30,9 +30,10 @@ def find_word(letter, positon, path_dictionnary = PATH_DICO):
         
     for word in words:
         try:
-            if word[positon]==letter:
-                print(word)
-                return word
+            for l,p in zip(letter, positon):
+                if word[p]==l:
+                    print(word)
+                    return word.strip()
         except:
             pass
         
@@ -56,4 +57,4 @@ if __name__ == "__main__":
     # definition_trad = traduire_texte(definition)
     # print(f"{random_word}: {definition_trad}")
     
-    find_word('o', 5, path_dictionnary = PATH_DICO)
+    find_word('e', 1, path_dictionnary = PATH_DICO)
